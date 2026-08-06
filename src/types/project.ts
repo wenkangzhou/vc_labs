@@ -28,7 +28,6 @@ export type Project = {
   priority?: number;
   techStack: string[];
   cover?: string;
-  qrCode?: string;
   mark: string;
   theme: string;
   createdAt: string;

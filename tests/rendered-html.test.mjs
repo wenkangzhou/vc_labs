@@ -35,6 +35,7 @@ test("server-renders the project launchpad", async () => {
   assert.match(html, /Recent activity/);
   assert.match(html, /搜索项目、技术栈、标签/);
   assert.match(html, /aria-label="打开命令面板"/);
+  assert.doesNotMatch(html, /SCAN WITH WECHAT|biu-calendar-qr/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/);
 });
 
