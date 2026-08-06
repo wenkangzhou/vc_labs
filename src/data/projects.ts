@@ -222,8 +222,8 @@ export const projects: Project[] = [
     createdAt: "2026.04",
     updatedAt: "2026.06.18",
     progress: 18,
-    note: "正在研究 Web 部署，入口稍后补充。",
-    links: [],
+    note: "正在研究 Web 部署，先把第一版入口接入实验室。",
+    links: [{ type: "product", label: "打开 cocos_practice", url: "https://cocos-practice-gamma.vercel.app/" }],
   },
   {
     id: "mario-go",
