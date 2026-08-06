@@ -146,6 +146,13 @@ function ProjectCard({
         </div>
       </div>
 
+      {project.qrCode && (
+        <div className="project-qr-preview" aria-label="扫码打开 biu_calendar">
+          <Image src={project.qrCode} alt="biu_calendar 小程序二维码" width={58} height={58} />
+          <span>SCAN</span>
+        </div>
+      )}
+
       <p className="project-description">{project.shortDescription}</p>
 
       <div className="project-card-footer">
@@ -195,7 +202,7 @@ function DetailPanel({
   onNext: () => void;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
-  const productLink = project.links.find((link) => link.type === "product" || link.type === "demo");
+  const productLink = project.links.find((link) => link.type === "product" || link.type === "demo" || link.type === "github");
 
   useEffect(() => {
     panelRef.current?.focus();
@@ -260,12 +267,20 @@ function DetailPanel({
               <p>“{project.motivation}”</p>
             </div>
           </div>
-          <div className="detail-signal-card">
-            <span>BUILD SIGNAL</span>
-            <strong>{project.progress ?? 0}%</strong>
-            <div className="signal-lines"><i /><i /><i /><i /><i /><i /><i /><i /></div>
-            <small>{statusMeta[project.status].short} / {project.updatedAt}</small>
-          </div>
+          {project.qrCode ? (
+            <div className="detail-qr-card">
+              <Image src={project.qrCode} alt="biu_calendar 微信小程序二维码" width={132} height={132} />
+              <span>SCAN WITH WECHAT</span>
+              <small>打开 biu_calendar</small>
+            </div>
+          ) : (
+            <div className="detail-signal-card">
+              <span>BUILD SIGNAL</span>
+              <strong>{project.progress ?? 0}%</strong>
+              <div className="signal-lines"><i /><i /><i /><i /><i /><i /><i /><i /></div>
+              <small>{statusMeta[project.status].short} / {project.updatedAt}</small>
+            </div>
+          )}
         </div>
 
         <div className="detail-grid">
@@ -306,7 +321,7 @@ function DetailPanel({
           <div className="detail-actions">
             {productLink ? (
               <button type="button" className="button button-primary" onClick={() => onOpenProject(project)}>
-                打开项目 <span>↗</span>
+                {productLink.type === "github" ? "打开 Release" : "打开项目"} <span>↗</span>
               </button>
             ) : <span className="detail-private-label">ACCESS / BUILD IN PROGRESS</span>}
             {productLink && (
@@ -522,7 +537,7 @@ export default function Home() {
   };
 
   const openProject = (project: Project) => {
-    const link = project.links.find((candidate) => candidate.type === "product" || candidate.type === "demo");
+    const link = project.links.find((candidate) => candidate.type === "product" || candidate.type === "demo" || candidate.type === "github");
     if (link) openInNewTab(link.url);
     else showToast("这个节点还在实验室里，入口尚未公开");
   };
@@ -537,7 +552,10 @@ export default function Home() {
       const matchesTag = tagFilter === "全部" || project.tags.includes(tagFilter);
       const matchesSpecial = specialFilter === "all" || (specialFilter === "favorites" ? favoriteIds.includes(project.id) : recentIds.includes(project.id));
       return matchesSearch && matchesStatus && matchesCategory && matchesTag && matchesSpecial;
-    }).sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
+    }).sort((a, b) => {
+      if (a.priority || b.priority) return (a.priority ?? 99) - (b.priority ?? 99);
+      return Number(Boolean(b.featured)) - Number(Boolean(a.featured));
+    });
   }, [categoryFilter, favoriteIds, recentIds, search, specialFilter, statusFilter, tagFilter]);
 
   const allTags = useMemo(() => ["全部", ...Array.from(new Set(projects.flatMap((project) => project.tags))).sort()], []);

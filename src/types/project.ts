@@ -25,8 +25,10 @@ export type Project = {
   featured?: boolean;
   favorite?: boolean;
   private?: boolean;
+  priority?: number;
   techStack: string[];
   cover?: string;
+  qrCode?: string;
   mark: string;
   theme: string;
   createdAt: string;
