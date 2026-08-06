@@ -245,25 +245,6 @@ export const projects: Project[] = [
     progress: 36,
     links: [{ type: "github", label: "打开 mario-go Release", url: "https://github.com/wenkangzhou/Mario-Go/releases/tag/v0.1.1" }],
   },
-  {
-    id: "ambient-room",
-    name: "音乐氛围实验",
-    englishName: "Ambient Room",
-    shortDescription: "将环境音乐、动态视觉和专注场景结合的轻量实验。",
-    description:
-      "一个还在纸上发光的角落：不同的声音、光线和专注状态，能不能组成一个更好的房间。",
-    motivation: "不是所有项目都要立刻变成产品，有些值得先保持开放。",
-    category: ["音乐", "视觉实验"],
-    tags: ["氛围", "专注", "音乐", "动态视觉"],
-    status: "incubating",
-    techStack: ["Web Audio", "Canvas", "Motion"],
-    mark: "⌁",
-    theme: "#a87ee8",
-    createdAt: "2026.07",
-    updatedAt: "2026.07.17",
-    progress: 8,
-    links: [],
-  },
 ];
 
 export const projectCategories = [
