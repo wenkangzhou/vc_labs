@@ -32,9 +32,10 @@ test("server-renders the project launchpad", async () => {
   assert.match(html, /mario-go/);
   assert.match(html, /cocos_practice/);
   assert.match(html, /PDF Frames/);
-  assert.match(html, /Recent activity/);
-  assert.match(html, /搜索项目、技术栈、标签/);
-  assert.match(html, /aria-label="打开命令面板"/);
+  assert.doesNotMatch(html, /Recent activity/);
+  assert.doesNotMatch(html, /搜索项目、技术栈、标签|aria-label="打开命令面板"/);
+  assert.doesNotMatch(html, /IN DEVELOPMENT|PROJECT NODES|LAST SIGNAL|UPDATED|收藏项目|★|☆/);
+  assert.doesNotMatch(html, /status-pill|filter-toggle|recent-strip/);
   assert.doesNotMatch(html, /SCAN WITH WECHAT|biu-calendar-qr/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/);
 });
