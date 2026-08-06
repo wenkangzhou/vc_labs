@@ -260,12 +260,20 @@ function DetailPanel({
               <p>“{project.motivation}”</p>
             </div>
           </div>
-          <div className="detail-signal-card">
-            <span>BUILD SIGNAL</span>
-            <strong>{project.progress ?? 0}%</strong>
-            <div className="signal-lines"><i /><i /><i /><i /><i /><i /><i /><i /></div>
-            <small>{statusMeta[project.status].short} / {project.updatedAt}</small>
-          </div>
+          {project.qrCode ? (
+            <div className="detail-qr-card">
+              <Image src={project.qrCode} alt="biu_calendar 微信小程序二维码" width={132} height={132} />
+              <span>SCAN WITH WECHAT</span>
+              <small>打开 biu_calendar</small>
+            </div>
+          ) : (
+            <div className="detail-signal-card">
+              <span>BUILD SIGNAL</span>
+              <strong>{project.progress ?? 0}%</strong>
+              <div className="signal-lines"><i /><i /><i /><i /><i /><i /><i /><i /></div>
+              <small>{statusMeta[project.status].short} / {project.updatedAt}</small>
+            </div>
+          )}
         </div>
 
         <div className="detail-grid">

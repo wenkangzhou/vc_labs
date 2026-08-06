@@ -84,6 +84,7 @@ export const projects: Project[] = [
     createdAt: "2026.05",
     updatedAt: "2026.08.06",
     progress: 86,
+    qrCode: "/biu-calendar-qr.png",
     note: "家庭日程、提醒和成员权限集中在一个轻量入口里。",
     links: [],
   },
