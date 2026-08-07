@@ -79,10 +79,6 @@ function ProjectCard({
       aria-label={`打开 ${project.name} 项目详情`}
     >
       <div className="card-spotlight" aria-hidden="true" />
-      <div className="project-card-topline">
-        <span className="project-index">{String(index + 1).padStart(2, "0")}</span>
-      </div>
-
       <div className="project-card-heading">
         <span className="project-glyph" style={{ "--accent": project.theme } as CSSProperties}>
           {project.mark}
@@ -346,7 +342,6 @@ export default function Home() {
           <BrandMark />
           <span className="brand-copy"><strong>CHOU&apos;S</strong><span>INFINITE LABS</span></span>
         </Link>
-        <div className="header-status"><i /> SYSTEM ONLINE</div>
         <div className="header-actions">
           <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label="切换深浅主题" aria-pressed={theme === "light"}>
             <span>{theme === "dark" ? "☼" : "☾"}</span><b>{theme === "dark" ? "DARK" : "LIGHT"}</b>
