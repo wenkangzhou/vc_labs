@@ -304,7 +304,11 @@ export default function Home() {
       return;
     }
 
-    document.getElementById(sectionId)?.scrollIntoView({ behavior, block: "start" });
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+
+    const top = target.getBoundingClientRect().top + window.scrollY - 24;
+    window.scrollTo({ top: Math.max(0, top), left: 0, behavior });
   }, []);
 
   const showToast = (message: string) => setToast(message);
