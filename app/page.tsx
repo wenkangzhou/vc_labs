@@ -10,7 +10,6 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { launchpadCopy, projects } from "../src/data/projects";
 import type { Project } from "../src/types/project";
@@ -297,6 +296,10 @@ export default function Home() {
     });
   }, []);
 
+  const scrollToSection = useCallback((sectionId: "page-top" | "projects") => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
   const showToast = (message: string) => setToast(message);
 
   const copyLink = async (url: string) => {
@@ -327,16 +330,16 @@ export default function Home() {
   };
 
   return (
-    <main className="launchpad-shell">
+    <main className="launchpad-shell" id="page-top">
       <div className="ambient-glow ambient-glow-one" aria-hidden="true" />
       <div className="ambient-glow ambient-glow-two" aria-hidden="true" />
       <div className="noise-layer" aria-hidden="true" />
 
       <header className="site-header page-width">
-        <Link className="brand-lockup" href="/" aria-label="返回无限实验室首页">
+        <button type="button" className="brand-lockup" onClick={() => scrollToSection("page-top")} aria-label="返回页面顶部">
           <BrandMark />
           <span className="brand-copy"><strong>CHOU&apos;S</strong><span>INFINITE LABS</span></span>
-        </Link>
+        </button>
         <div className="header-actions">
           <button type="button" className="theme-toggle" onClick={toggleTheme} aria-label="切换深浅主题" aria-pressed={theme === "light"}>
             <span>{theme === "dark" ? "☼" : "☾"}</span><b>{theme === "dark" ? "DARK" : "LIGHT"}</b>
@@ -349,7 +352,7 @@ export default function Home() {
           <p className="eyebrow"><span className="eyebrow-line" />{launchpadCopy.eyebrow}</p>
           <h1>Things <em>I</em> build<span className="title-dot">.</span></h1>
           <p className="hero-intro">{launchpadCopy.intro}</p>
-          <a className="hero-jump" href="#projects">直接看作品 <span>↓</span></a>
+          <button type="button" className="hero-jump" onClick={() => scrollToSection("projects")}>直接看作品 <span>↓</span></button>
         </div>
         <div className="hero-motif" aria-hidden="true">
           <span className="hero-motif-orbit hero-motif-orbit-one" />
@@ -362,7 +365,13 @@ export default function Home() {
       </section>
 
       <section className="projects-section page-width" id="projects" aria-labelledby="projects-heading">
-        <div className="section-header"><div><p className="eyebrow"><span className="eyebrow-line" />WORK / 作品集</p><h2 id="projects-heading">Selected work</h2></div><p className="section-aside">从跑步、教育到生活工具。<br />点击任意作品，看看它为什么被做出来。</p></div>
+        <div className="section-header">
+          <div><p className="eyebrow"><span className="eyebrow-line" />WORK / 作品集</p><h2 id="projects-heading">Selected work</h2></div>
+          <div className="section-header-side">
+            <p className="section-aside">从跑步、教育到生活工具。<br />点击任意作品，看看它为什么被做出来。</p>
+            <button type="button" className="back-to-top" onClick={() => scrollToSection("page-top")} aria-label="回到页面顶部">回到顶部 <span>↑</span></button>
+          </div>
+        </div>
         <div className="project-grid">
           {visibleProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={openDetail} />)}
         </div>

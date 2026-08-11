@@ -26,6 +26,9 @@ test("server-renders the project launchpad", async () => {
   assert.match(html, /Chou&#x27;s Infinite Labs/);
   assert.match(html, /Things <em>I<\/em> build/);
   assert.match(html, /Selected work/);
+  assert.match(html, /直接看作品/);
+  assert.match(html, /回到顶部/);
+  assert.doesNotMatch(html, /href="#projects"/);
   assert.match(html, /Run Blue/);
   assert.match(html, /20 以内加减法/);
   assert.match(html, /biu_calendar/);
