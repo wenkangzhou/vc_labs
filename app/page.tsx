@@ -297,7 +297,14 @@ export default function Home() {
   }, []);
 
   const scrollToSection = useCallback((sectionId: "page-top" | "projects") => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const behavior: ScrollBehavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+
+    if (sectionId === "page-top") {
+      window.scrollTo({ top: 0, left: 0, behavior });
+      return;
+    }
+
+    document.getElementById(sectionId)?.scrollIntoView({ behavior, block: "start" });
   }, []);
 
   const showToast = (message: string) => setToast(message);

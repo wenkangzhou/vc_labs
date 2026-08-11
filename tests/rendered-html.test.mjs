@@ -61,6 +61,7 @@ test("keeps project content in data files", async () => {
   assert.match(data, /biu-calendar/);
   assert.doesNotMatch(data, /seedling-pin|yibu-trail/);
   assert.match(page, /from "\.\.\/src\/data\/projects"/);
+  assert.match(page, /window\.scrollTo\(\{ top: 0/);
   assert.match(css, /prefers-reduced-motion/);
   assert.equal(skeleton, false);
 });
