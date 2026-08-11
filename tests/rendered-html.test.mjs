@@ -25,7 +25,7 @@ test("server-renders the project launchpad", async () => {
   const html = await response.text();
   assert.match(html, /Chou&#x27;s Infinite Labs/);
   assert.match(html, /Things <em>I<\/em> build/);
-  assert.match(html, /Project nodes/);
+  assert.match(html, /Selected work/);
   assert.match(html, /Run Blue/);
   assert.match(html, /20 以内加减法/);
   assert.match(html, /biu_calendar/);

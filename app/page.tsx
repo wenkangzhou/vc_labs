@@ -79,6 +79,12 @@ function ProjectCard({
       aria-label={`打开 ${project.name} 项目详情`}
     >
       <div className="card-spotlight" aria-hidden="true" />
+      {project.featured && (
+        <div className="project-card-art" aria-hidden="true">
+          <span className="project-art-orbit" />
+          <span className="project-art-mark">{project.mark}</span>
+        </div>
+      )}
       <div className="project-card-heading">
         <span className="project-glyph" style={{ "--accent": project.theme } as CSSProperties}>
           {project.mark}
@@ -102,17 +108,6 @@ function ProjectCard({
         </span>
       </div>
 
-      {project.featured && (
-        <div className="project-progress">
-          <div className="progress-label">
-            <span>PROJECT SIGNAL</span>
-            <span>{project.progress}%</span>
-          </div>
-          <div className="progress-track">
-            <span style={{ width: `${project.progress}%` }} />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -354,29 +349,26 @@ export default function Home() {
           <p className="eyebrow"><span className="eyebrow-line" />{launchpadCopy.eyebrow}</p>
           <h1>Things <em>I</em> build<span className="title-dot">.</span></h1>
           <p className="hero-intro">{launchpadCopy.intro}</p>
+          <a className="hero-jump" href="#projects">直接看作品 <span>↓</span></a>
         </div>
-        <div className="hero-instrument" aria-label="实验室项目状态概览">
-          <div className="instrument-topline"><span>LAB STATUS / 2026</span><span>LIVE FEED <i /></span></div>
-          <div className="instrument-core">
-            <div className="orbit orbit-a" /><div className="orbit orbit-b" /><div className="orbit orbit-c" />
-            <div className="core-node"><BrandMark small /><span>∞</span></div>
-            <i className="orbit-node node-one" /><i className="orbit-node node-two" /><i className="orbit-node node-three" />
-            <span className="instrument-label label-one">IDEAS / OPEN</span>
-            <span className="instrument-label label-two">SHIPPED / LIVE</span>
-            <span className="instrument-label label-three">NEXT / ?</span>
-          </div>
-          <div className="instrument-bottomline"><span>KEEP MAKING</span><span>● ● ● ○ ○</span></div>
+        <div className="hero-motif" aria-hidden="true">
+          <span className="hero-motif-orbit hero-motif-orbit-one" />
+          <span className="hero-motif-orbit hero-motif-orbit-two" />
+          <span className="hero-motif-dot hero-motif-dot-one" />
+          <span className="hero-motif-dot hero-motif-dot-two" />
+          <span className="hero-motif-core">∞</span>
+          <small>MADE WITH CURIOSITY</small>
         </div>
       </section>
 
-      <section className="projects-section page-width" aria-labelledby="projects-heading">
-        <div className="section-header"><div><p className="eyebrow"><span className="eyebrow-line" />ACTIVE CONSTELLATION</p><h2 id="projects-heading">Project nodes</h2></div><p className="section-aside">每一个项目都是一个正在运行的实验。<br />点击节点，查看它的完整轨迹。</p></div>
+      <section className="projects-section page-width" id="projects" aria-labelledby="projects-heading">
+        <div className="section-header"><div><p className="eyebrow"><span className="eyebrow-line" />WORK / 作品集</p><h2 id="projects-heading">Selected work</h2></div><p className="section-aside">从跑步、教育到生活工具。<br />点击任意作品，看看它为什么被做出来。</p></div>
         <div className="project-grid">
           {visibleProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={openDetail} />)}
         </div>
       </section>
 
-      <footer className="site-footer page-width"><div className="footer-brand"><BrandMark small /><div><strong>CHOU&apos;S INFINITE LABS</strong><p>{launchpadCopy.footer}</p></div></div><div className="footer-links"><a href="https://github.com/wenkangzhou" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><span>BUILT WITH AI + CURIOSITY</span></div><div className="footer-base"><span>© 2026 / ALL EXPERIMENTS RESERVED</span><span>LAUNCHPAD v1.0.0</span></div></footer>
+      <footer className="site-footer page-width"><div className="footer-brand"><BrandMark small /><div><strong>CHOU&apos;S INFINITE LABS</strong><p>{launchpadCopy.footer}</p></div></div><div className="footer-links"><a href="https://github.com/wenkangzhou" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><span>© 2026</span></div></footer>
 
       {activeProject && <DetailPanel project={activeProject} onClose={closeDetail} onOpenProject={openProject} onCopy={copyLink} onPrevious={() => moveDetail(-1)} onNext={() => moveDetail(1)} />}
       {toast && <div className="toast" role="status">{toast}</div>}
