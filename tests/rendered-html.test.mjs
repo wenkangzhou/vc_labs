@@ -34,6 +34,7 @@ test("server-renders the project launchpad", async () => {
   assert.match(html, /biu_calendar/);
   assert.match(html, /mario-go/);
   assert.match(html, /cocos_practice/);
+  assert.match(html, /基于 Cocos Creator 制作/);
   assert.match(html, /PDF Frames/);
   assert.doesNotMatch(html, /Recent activity/);
   assert.doesNotMatch(html, /搜索项目、技术栈、标签|aria-label="打开命令面板"/);

@@ -210,7 +210,7 @@ export const projects: Project[] = [
     id: "cocos-practice",
     name: "战棋游戏原型",
     englishName: "cocos_practice",
-    shortDescription: "一关完整体验的火焰纹章式战棋游戏原型。",
+    shortDescription: "基于 Cocos Creator 制作的火焰纹章式战棋游戏原型，提供一关完整体验。",
     description:
       "从一张地图、一支小队和一场完整战斗开始，试着把策略、叙事和火焰的情绪放进同一回合。",
     motivation: "有一些想法，只有做成能玩的东西，才知道它是不是真的成立。",
