@@ -29,7 +29,6 @@ export type Project = {
   techStack: string[];
   cover?: string;
   qrCode?: string;
-  mark: string;
   theme: string;
   createdAt: string;
   updatedAt: string;

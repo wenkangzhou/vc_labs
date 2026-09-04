@@ -81,13 +81,9 @@ function ProjectCard({
       {project.featured && (
         <div className="project-card-art" aria-hidden="true">
           <span className="project-art-orbit" />
-          <span className="project-art-mark">{project.mark}</span>
         </div>
       )}
       <div className="project-card-heading">
-        <span className="project-glyph" style={{ "--accent": project.theme } as CSSProperties}>
-          {project.mark}
-        </span>
         <div>
           <h3>{project.name}</h3>
           {project.englishName && <p>{project.englishName}</p>}
@@ -167,7 +163,6 @@ function DetailPanel({
         </header>
 
         <div className="detail-title-row">
-          <span className="detail-glyph">{project.mark}</span>
           <div>
             <h2 id="detail-title">{project.name}</h2>
             {project.englishName && <p>{project.englishName}</p>}
