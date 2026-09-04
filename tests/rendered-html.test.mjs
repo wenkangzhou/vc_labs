@@ -17,18 +17,16 @@ async function render() {
   );
 }
 
-test("server-renders the project launchpad", async () => {
+test("server-renders the compact project dock", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /Chou&#x27;s Infinite Labs/);
-  assert.match(html, /Things <em>I<\/em> build/);
-  assert.match(html, /Selected work/);
-  assert.match(html, /直接看作品/);
-  assert.match(html, /回到顶部/);
-  assert.doesNotMatch(html, /href="#projects"/);
+  assert.match(html, /VIBE CODING/);
+  assert.match(html, /Projects/);
+  assert.match(html, /Pick one\. Open it\./);
+  assert.doesNotMatch(html, /Things <em>I<\/em> build|Selected work|直接看作品|回到顶部/);
   assert.match(html, /Run Blue/);
   assert.match(html, /20 以内加减法/);
   assert.match(html, /biu_calendar/);
@@ -36,11 +34,14 @@ test("server-renders the project launchpad", async () => {
   assert.match(html, /cocos_practice/);
   assert.match(html, /基于 Cocos Creator 制作/);
   assert.match(html, /PDF Frames/);
+  assert.match(html, /PhraseChu/);
+  assert.match(html, /href="https:\/\/runblue\.yibuu\.com\/"/);
+  assert.match(html, /href="https:\/\/math-train\.yibuu\.com\/"/);
   assert.doesNotMatch(html, /Recent activity/);
   assert.doesNotMatch(html, /搜索项目、技术栈、标签|aria-label="打开命令面板"/);
   assert.doesNotMatch(html, /IN DEVELOPMENT|PROJECT NODES|LAST SIGNAL|UPDATED|收藏项目|★|☆/);
   assert.doesNotMatch(html, /status-pill|filter-toggle|recent-strip/);
-  assert.doesNotMatch(html, /SCAN WITH WECHAT|biu-calendar-qr/);
+  assert.doesNotMatch(html, /biu-calendar-qr/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/);
 });
 
@@ -62,9 +63,9 @@ test("keeps project content in data files", async () => {
   assert.match(data, /biu-calendar/);
   assert.doesNotMatch(data, /seedling-pin|yibu-trail/);
   assert.match(page, /from "\.\.\/src\/data\/projects"/);
-  assert.match(page, /window\.scrollTo\(\{ top: 0/);
-  assert.match(page, /getBoundingClientRect\(\)\.top \+ window\.scrollY/);
-  assert.doesNotMatch(page, /scrollIntoView/);
+  assert.match(page, /target="_blank"/);
+  assert.match(page, /onOpenQr/);
+  assert.doesNotMatch(page, /scrollToSection|scrollIntoView/);
   assert.match(css, /overflow: clip/);
   assert.match(css, /prefers-reduced-motion/);
   assert.equal(skeleton, false);

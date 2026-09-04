@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Chou's Infinite Labs — Project Launchpad",
-  description: "一个由 AI、代码、兴趣和偶然灵感组成的个人数字实验室。",
+  title: "Chou's Vibe Projects",
+  description: "周文康的 Vibe Coding 项目入口。",
   icons: {
     icon: "/brand-mark.png",
     shortcut: "/brand-mark.png",
   },
   openGraph: {
-    title: "Chou's Infinite Labs — Project Launchpad",
-    description: "A small universe of useful experiments, built one curiosity at a time.",
+    title: "Chou's Vibe Projects",
+    description: "A compact launchpad for things I build.",
     type: "website",
   },
 };
